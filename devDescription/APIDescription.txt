@@ -1,0 +1,83 @@
+UserAPI
+
+# Login
+
+
+Post /login
+
+Request
+{
+    "id" : "UserId",
+    "pw" : "1234"
+}
+
+Response 성공시 유저 정보 반환
+{
+    "login" : true | false
+    "user" : {
+                    "id" : "UserID",
+                    "pw" : "1234",
+                    "UserLevel" : "Admin"
+                    ...
+             }
+
+    // 상태코드 200
+
+}
+
+# Objects
+
+- 오브젝트 정보 불러오기
+Get /objects/:objectName
+
+Response 성공시 객체List 반환
+{
+    "objectName" : ":objectName",
+    objects :
+    [
+        {...},
+        {...}
+    ]
+}
+
+Post /objects/:objectName
+Put /objects/:objectName
+Delete /objects/:objectName
+
+Request
+{
+    "objects" :
+    [
+        {...},
+        {...}
+    ]
+}
+
+Response 성공시 전체 객체List 반환
+{
+    objects :
+    [
+        {...},
+        {...}
+    ]
+}
+
+
+# Menu
+
+
+Get /menus
+
+Response 성공시 메뉴 정보 반환
+{
+    menus:
+    [
+        {
+            "menuName" : "t",
+            "superMenuname" : "dd",
+            ....
+        },
+        {}
+    ]
+    // 상태코드 200
+}
