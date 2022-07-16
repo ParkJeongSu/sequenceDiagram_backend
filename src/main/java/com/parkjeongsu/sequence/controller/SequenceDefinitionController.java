@@ -30,13 +30,17 @@ public class SequenceDefinitionController {
         return sequenceDefinition;
     }
 
-    @PutMapping("sequences")
+    @PutMapping("sequence/{id}")
     @ResponseBody
-    public HashMap<String,Object> setSequence(@RequestBody HashMap<String,Object> map){
+    public SequenceDefinition setSequence(@PathVariable("id") String id,@RequestBody HashMap<String,Object> map){
 
-        //List<SequenceDefinition> sdList = sequenceService.modifyMenu();
-        //map.put("objects",sdList);
-        return map;
+        System.out.println(map);
+        SequenceDefinition sequenceDefinition = new SequenceDefinition();
+        sequenceDefinition.setId(Long.parseLong(id));
+        sequenceDefinition.setSequenceMenuName(map.get("sequenceMenuName").toString());
+        sequenceDefinition.setDiagramText(map.get("sequenceText").toString());
+        sequenceService.modifyMenu(sequenceDefinition);
+        return sequenceService.getSequence(id);
     }
 
     @PostMapping("sequences")
