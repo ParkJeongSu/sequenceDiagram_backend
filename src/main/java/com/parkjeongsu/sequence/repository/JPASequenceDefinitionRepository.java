@@ -19,11 +19,20 @@ public class JPASequenceDefinitionRepository implements SequenceDefinitionReposi
 
     public SequenceDefinition create(SequenceDefinition sequenceDefinition){
         try {
-
+            List<SequenceDefinition> SequenceDefinitionList= this.readAll();
             em = emf.createEntityManager();
             EntityTransaction tx = em.getTransaction();
             tx.begin();
             try{
+
+                Long lastId = 0L;
+                for(SequenceDefinition s : SequenceDefinitionList){
+                    if(s.getId()>lastId){
+                        lastId =s.getId();
+                    }
+                }
+                lastId++;
+                sequenceDefinition.setId(lastId);
                 em.persist(sequenceDefinition);
                 System.out.println("Id : " + sequenceDefinition.getId());
                 System.out.println("SequenceMenuName : " + sequenceDefinition.getSequenceMenuName());
@@ -41,6 +50,9 @@ public class JPASequenceDefinitionRepository implements SequenceDefinitionReposi
         }
         catch (Exception e){
             System.out.println(e.getMessage());
+        }
+        finally {
+            em.close();
         }
 
         return sequenceDefinition;

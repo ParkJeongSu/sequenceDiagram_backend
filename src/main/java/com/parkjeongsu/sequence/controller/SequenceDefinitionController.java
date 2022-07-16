@@ -43,12 +43,12 @@ public class SequenceDefinitionController {
         return sequenceService.getSequence(id);
     }
 
-    @PostMapping("sequences")
+    @PostMapping("sequence")
     @ResponseBody
-    public HashMap<String,Object> createSequence(@RequestBody HashMap<String,Object> map){
-        //HashMap<String,Object> map = new HashMap<>();
-        List<SequenceDefinition> sdList = sequenceService.getSequenceList();
-        map.put("objects",sdList);
-        return map;
+    public List<SequenceDefinition> createSequence(@RequestBody HashMap<String,Object> map){
+        System.out.println(map);
+        String sequenceMenuName = map.get("sequenceMenuName").toString();
+        List<SequenceDefinition> sdList = sequenceService.createMenu(sequenceMenuName);
+        return sdList;
     }
 }

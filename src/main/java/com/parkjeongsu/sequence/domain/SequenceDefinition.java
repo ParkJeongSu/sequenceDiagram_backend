@@ -6,7 +6,6 @@ import java.io.Serializable;
 @Table(name="SEQUENCEDEFINITION")
 public class SequenceDefinition implements Serializable {
     @Id
-    @GeneratedValue
     @Column(name="ID")
     private Long id;
 
