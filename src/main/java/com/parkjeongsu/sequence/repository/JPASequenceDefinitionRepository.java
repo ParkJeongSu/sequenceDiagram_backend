@@ -60,7 +60,7 @@ public class JPASequenceDefinitionRepository implements SequenceDefinitionReposi
 
     public List<SequenceDefinition> readAll() {
         em = emf.createEntityManager();
-        String jpql = "SELECT b FROM SequenceDefinition b ";
+        String jpql = "SELECT b FROM SequenceDefinition b order by b.id";
         Query query = em.createQuery(jpql);
         List<SequenceDefinition> sequenceDefinitionList = query.getResultList();
         em.close();
@@ -105,11 +105,7 @@ public class JPASequenceDefinitionRepository implements SequenceDefinitionReposi
     public SequenceDefinition getSequenceDefinition(String id) {
 
         try {
-
             em = emf.createEntityManager();
-            EntityTransaction tx = em.getTransaction();
-            tx.begin();
-
             SequenceDefinition findSD = em.find(SequenceDefinition.class,Long.parseLong(id));
             return findSD;
         }

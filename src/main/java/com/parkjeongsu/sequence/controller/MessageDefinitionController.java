@@ -36,11 +36,15 @@ public class MessageDefinitionController {
 
         System.out.println(map);
         MessageDefinition MessageDefinition = new MessageDefinition();
+
+        String messageExampleContent = map.get("messageExampleContent") == null ? "" : map.get("messageExampleContent").toString();
+        String messageDescription = map.get("messageDescription") == null ? "" : map.get("messageDescription").toString();
+
         MessageDefinition.setId(Long.parseLong(id));
-        MessageDefinition.setExampleMessageContent(map.get("messageExampleContent").toString());
-        MessageDefinition.setMessageDescription(map.get("messageDescription").toString());
+        MessageDefinition.setExampleMessageContent(messageExampleContent);
+        MessageDefinition.setMessageDescription(messageDescription);
         MessageService.modifyMessage(MessageDefinition);
-        return MessageService.getMessage(id);
+        return MessageService.getMessageById(Long.parseLong(id));
     }
 
     @PostMapping("message")

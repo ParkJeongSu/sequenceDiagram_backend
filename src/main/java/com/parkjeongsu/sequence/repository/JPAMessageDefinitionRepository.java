@@ -125,4 +125,24 @@ public class JPAMessageDefinitionRepository implements MessageDefinitionReposito
         return null;
     }
 
+
+    public MessageDefinition getMessageDefinition(Long id) {
+
+        try {
+
+            em = emf.createEntityManager();
+
+            MessageDefinition findSD = em.find(MessageDefinition.class,id);
+            return findSD;
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        finally {
+            em.close();
+        }
+
+        return null;
+    }
+
 }

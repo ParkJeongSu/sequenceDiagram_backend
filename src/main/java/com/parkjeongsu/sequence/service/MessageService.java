@@ -30,4 +30,7 @@ public class MessageService {
     public MessageDefinition getMessage(String messageName){
         return jpaMessageDefinitionRepository.getMessageDefinitionByMessageName(messageName);
     }
+    public MessageDefinition getMessageById(Long id){
+        return jpaMessageDefinitionRepository.getMessageDefinition(id);
+    }
 }
